@@ -3,7 +3,7 @@ import Groq from "groq-sdk";
 import "dotenv/config";
 
 // System prompt for the AI, providing guidelines on how to respond to users
-const systemPrompt: string = `Welcome to the Headstarter Fitness App! Our mission is to help you achieve your fitness goals through personalized workouts, nutrition plans, and wellness tracking. Here are some key features and guidelines to help you get started:
+const systemPrompt = `Welcome to the Headstarter Fitness App! Our mission is to help you achieve your fitness goals through personalized workouts, nutrition plans, and wellness tracking. Here are some key features and guidelines to help you get started:
 
 Features:
 
@@ -74,10 +74,10 @@ Get ready to embark on your fitness journey with Headstarter Fitness App! Let's 
 Only answer questions related to the Headstarter Fitness App. or fitness related exclusively. DO not answer questions related to other apps or topics.`;
 
 // POST function to handle incoming requests
-export async function POST(request: Request): Promise<NextResponse<unknown>> {
+export async function POST(request: any) {
   
-  const groq: Groq = new Groq({ apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY });
-  const data: any = await request.json(); // Parse the JSON body of the incoming request
+  const groq = new Groq({ apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY });
+  const data = await request.json(); // Parse the JSON body of the incoming request
 
   // Create a chat completion request to the OpenAI API
   const completion = await groq.chat.completions.create({
@@ -87,15 +87,15 @@ export async function POST(request: Request): Promise<NextResponse<unknown>> {
   });
 
   // Create a ReadableStream to handle the streaming response
-  const stream: ReadableStream<any> = new ReadableStream({
+  const stream = new ReadableStream({
     async start(controller) {
-      const encoder: TextEncoder = new TextEncoder(); // Create a TextEncoder to convert strings to Uint8Array
+      const encoder = new TextEncoder(); // Create a TextEncoder to convert strings to Uint8Array
       try {
         // Iterate over the streamed chunks of the response
         for await (const chunk of completion) {
-          const content: string | null | undefined = chunk.choices[0]?.delta?.content; // Extract the content from the chunk
+          const content = chunk.choices[0]?.delta?.content; // Extract the content from the chunk
           if (content) {
-            const text: Uint8Array = encoder.encode(content); // Encode the content to Uint8Array
+            const text = encoder.encode(content); // Encode the content to Uint8Array
             controller.enqueue(text); // Enqueue the encoded text to the stream
           }
         }
