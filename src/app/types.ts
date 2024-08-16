@@ -4,6 +4,6 @@ interface Message {
 }
 
 interface Style {
-  justifyContent?: string;
-  backgroundColor?: string;
+  justifyContent?: "flex-start" | "flex-end";
+  backgroundColor?: "rgb(59 130 246)" | "rgb(239 68 68)";
 }

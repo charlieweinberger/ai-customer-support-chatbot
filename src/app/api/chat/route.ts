@@ -89,20 +89,20 @@ export async function POST(request: any) {
   // Create a ReadableStream to handle the streaming response
   const stream = new ReadableStream({
     async start(controller) {
-      const encoder = new TextEncoder(); // Create a TextEncoder to convert strings to Uint8Array
+      const encoder = new TextEncoder();
       try {
         // Iterate over the streamed chunks of the response
         for await (const chunk of completion) {
           const content = chunk.choices[0]?.delta?.content; // Extract the content from the chunk
           if (content) {
-            const text = encoder.encode(content); // Encode the content to Uint8Array
+            const text = encoder.encode(content);
             controller.enqueue(text); // Enqueue the encoded text to the stream
           }
         }
       } catch (err) {
-        controller.error(err); // Handle any errors that occur during streaming
+        controller.error(err);
       } finally {
-        controller.close(); // Close the stream when done
+        controller.close();
       }
     },
   });

@@ -6,12 +6,12 @@ import type { Dispatch, SetStateAction } from "react";
 
 // CSS helper functions
 function getJustifyContent(messageRole: string): Style {
-  const flexType: string = (messageRole === "assistant") ? "start" : "end";
+  const flexType = (messageRole === "assistant") ? "start" : "end";
   return { justifyContent: `flex-${flexType}` };
 }
 
 function getBackgroundColor(messageRole: string): Style {
-  const bgColorType: string = (messageRole === "assistant") ? "rgb(59 130 246)" : "rgb(239 68 68)";
+  const bgColorType = (messageRole === "assistant") ? "rgb(59 130 246)" : "rgb(239 68 68)";
   return { backgroundColor: bgColorType };
 }
 
@@ -91,7 +91,7 @@ export default function Home(): JSX.Element {
 
   };
 
-  // Sends user message if the Enter key is pressed
+  // Sends user message if the enter key is pressed
   const handleEnterKey = (event: any) => {
     if (event.key === "Enter" && !event.shiftKey) {
       sendMessage();
@@ -100,35 +100,46 @@ export default function Home(): JSX.Element {
 
   // JSX
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <div className="flex flex-col w-[600px] h-[700px] border border-solid border-black p-4 m-6">
-        
-        {/* Messages */}
-        <div className="flex flex-col grow overflow-auto max-h-full m-4">
-          {
-            messages.map((message: Message, index: number) => {
-              return <div key={index} className="flex" style={ getJustifyContent(message.role) }>
-                  <div className="text-white rounded-lg p-6" style={ getBackgroundColor(message.role) }>
-                  {message.content}
-                  </div>
-              </div>
-            })
-          }
-        </div>
+    // <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen min-h-screen">
 
-        {/* Text field & button */}
-        <div className="flex flex-row m-4">
-          <input
-            className="w-full px-3 py-3 m-1 rounded-lg border border-[#cccccc] focus:outline focus:outline-2 focus:outline-[#aaaaaa] focus:outline-offset-2 bg-white"
-            placeholder="Message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            onKeyDown={handleEnterKey}
-          ></input>
-          <button className="px-3 py-3 m-1 w-28 rounded-lg font-bold text-white bg-blue-500 hover:bg-blue-700 active:outline active:outline-2 active:outline-[#aaaaaa] active:outline-offset-2" onClick={sendMessage}>Send</button>
-        </div>
-
+      {/* Navbar */}
+      <div className="flex justify-center items-center h-16 bg-blue-500 text-white font-bold text-2xl">
+        Headstarter Fitness Assistant
       </div>
+
+      {/* Message window */}
+      <div className="flex flex-col justify-center items-center h-[calc(100vh-64px)]">
+        <div className="flex flex-col w-[1000px] h-4/5 p-4 m-6 border border-solid border-black rounded-3xl">
+        
+          {/* Messages */}
+          <div className="flex flex-col-reverse grow overflow-auto max-h-full m-4 scrollbar scrollbar-thumb-blue-500 hover:scrollbar-thumb-blue-700">
+            {
+              messages.toReversed().map((message: Message, index: number) => {
+                return <div key={index} className="flex" style={ getJustifyContent(message.role) }>
+                  <div className="text-white rounded-3xl p-6 m-2 max-w-[70%]" style={ getBackgroundColor(message.role) }>
+                    {message.content}
+                  </div>
+                </div>
+              })
+            }
+          </div>
+
+          {/* Text field & button */}
+          <div className="flex flex-row m-4">
+            <input
+              className="w-full px-3 py-3 m-1 rounded-lg border border-[#cccccc] focus:outline focus:outline-2 focus:outline-[#aaaaaa] focus:outline-offset-2 bg-white"
+              placeholder="Message"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              onKeyDown={handleEnterKey}
+            ></input>
+            <button className="px-3 py-3 m-1 w-28 rounded-lg font-bold text-white bg-blue-500 hover:bg-blue-700 active:outline active:outline-2 active:outline-[#aaaaaa] active:outline-offset-2" onClick={sendMessage}>Send</button>
+          </div>
+
+        </div>
+      </div>
+      
     </div>
   );
 }
