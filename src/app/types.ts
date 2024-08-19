@@ -5,5 +5,6 @@ interface Message {
 
 interface Style {
   justifyContent?: "flex-start" | "flex-end";
-  backgroundColor?: "rgb(59 130 246)" | "rgb(239 68 68)";
+  backgroundColor?: "rgb(142 142 147)" | "rgb(55 65 81)";
+  
 }

@@ -11,7 +11,7 @@ function getJustifyContent(messageRole: string): Style {
 }
 
 function getBackgroundColor(messageRole: string): Style {
-  const bgColorType = (messageRole === "assistant") ? "rgb(59 130 246)" : "rgb(239 68 68)";
+  const bgColorType = (messageRole === "assistant") ? "rgb(142 142 147)" : "rgb(55 65 81)";
   return { backgroundColor: bgColorType };
 }
 
@@ -104,13 +104,13 @@ export default function Home(): JSX.Element {
     <div className="w-screen min-h-screen">
 
       {/* Navbar */}
-      <div className="flex justify-center items-center h-16 bg-blue-500 text-white font-bold text-2xl">
+      <div className="flex justify-center items-center h-16 bg-black text-white font-bold text-2xl">
         Headstarter Fitness Assistant
       </div>
 
       {/* Message window */}
-      <div className="flex flex-col justify-center items-center h-[calc(100vh-64px)]">
-        <div className="flex flex-col w-[1000px] h-4/5 p-4 m-6 border border-solid border-black rounded-3xl">
+      <div className="flex flex-col justify-center items-center h-[calc(100vh-64px)] bg-sky-300">
+        <div className="flex flex-col w-[1000px] h-4/5 p-4 m-6 rounded-3xl bg-white border border-solid border-black">
         
           {/* Messages */}
           <div className="flex flex-col-reverse grow overflow-auto max-h-full m-4 scrollbar scrollbar-thumb-blue-500 hover:scrollbar-thumb-blue-700">
