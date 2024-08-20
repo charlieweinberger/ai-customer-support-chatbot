@@ -109,7 +109,7 @@ export default function Home(): JSX.Element {
       </div>
 
       {/* Message window */}
-      <div className="flex flex-col justify-center items-center h-[calc(100vh-64px)] bg-sky-300">
+      <div className="flex flex-col justify-center items-center h-[calc(100vh-64px)] bg-white">
         <div className="flex flex-col w-[1000px] h-4/5 p-4 m-6 rounded-3xl bg-white border border-solid border-black">
         
           {/* Messages */}
